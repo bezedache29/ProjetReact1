@@ -1,17 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+// On récupère les modules React
+import React from 'react'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+// On récupère les modules React-Dom pour manipuler le DOM avec React
+import ReactDOM from 'react-dom'
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// On recupère le fichier App.js
+import App from "./App"
+
+// On place un contenue dans la balise #root du fichier index.html du dossier public
+// ReactDOM.render(<h1 className="test">Coucou</h1>, document.querySelector('#root'))
+ReactDOM.render(<App />, document.querySelector('#root'))
