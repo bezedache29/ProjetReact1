@@ -38,6 +38,7 @@ class Personne extends Component {
                 <h1 className={classes.monTitre}>{this.props.nom}</h1>
                 <AgePersonne age = {this.props.age} />
                 <div style={monStyle}>Sexe : {(this.props.sexe === true) ? "Homme" : "Femme"}</div>
+                <button onClick={this.props.clic}>Anniversaire</button>
             </>
         )
     }
