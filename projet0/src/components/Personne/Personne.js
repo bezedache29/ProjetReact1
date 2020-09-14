@@ -36,6 +36,8 @@ class Personne extends Component {
         return (
             <>
                 <h1 className={classes.monTitre}>{this.props.nom}</h1>
+                {/* children sert à afficher ce qu'il y a entre le composant (<Personne></Personne> de App.js) */}
+                {this.props.children}
                 <AgePersonne age = {this.props.age} />
                 <div style={monStyle}>Sexe : {(this.props.sexe === true) ? "Homme" : "Femme"}</div>
                 <button onClick={this.props.clic}>Anniversaire</button>
