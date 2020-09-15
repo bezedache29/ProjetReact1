@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react'
-// import Bouton from '../../components/Boutons/Bouton'
 import Livre from './Livre/Livre'
 
 class Livres extends Component {
@@ -53,6 +52,11 @@ class Livres extends Component {
 
         // On met a jour le tableau des livres
         this.setState({Livres: newLivre})
+    }
+
+    handleAjoutLivre = (titre, auteur, nbPages) => {
+        let l = `${titre} - ${auteur} - ${nbPages}`
+        console.log(l)
     }
 
     render() {
