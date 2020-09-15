@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import css from './FormulaireAjout.module.css'
 import Bouton from '../../../components/Boutons/Bouton'
-import Livres from '../Livres'
 
 class FormulaireAjout extends Component {
     state = {
@@ -14,7 +13,17 @@ class FormulaireAjout extends Component {
         // On empeche le rafraichissement de la page lors du clic sur valider
         event.preventDefault()
         // console.log(`${this.state.titreSaisi} - ${this.state.auteurSaisi} - ${this.state.nbPagesSaisi}`)
-        Livres.handleAjoutLivre(this.state.titreSaisi, this.state.auteurSaisi, this.state.nbPagesSaisi)
+        // On utilise la fonction passé en props sur Livres.js
+        this.props.validation(this.state.titreSaisi, this.state.auteurSaisi, this.state.nbPagesSaisi)
+
+        // On réinitalise le formulaire après l'ajout du livre
+        this.setState(() => {
+            return {
+                titreSaisi: "",
+                auteurSaisi : "",
+                nbPagesSaisi : ""
+            }
+        })
     }
 
     render() {
