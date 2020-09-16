@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import Alert from '../../components/Alerts/Alert'
 import FormulaireAjout from './FormulaireAjout/FormulaireAjout'
 import FormulaireModifier from './FormulaireModifier/FormulaireModifier'
 import Livre from './Livre/Livre'
@@ -34,32 +35,39 @@ class Livres extends Component {
 
         lastIdLivre : 4,
         modifier: true,
-        idLivreAModifier: 0
+        idLivreAModifier: 0,
+        alertMessage: null
     }
 
-    handleModifer = (id) => {
+    handleModifer = (id, titre, auteur, nbPages) => {
+        // On recupère le livre a modifier grace a son id
+        const numCaseTabLivre = this.state.livres.findIndex(element => {
+            return element.id === id
+        }) 
 
-        if(this.state.modifier === true) {
-            this.setState({modifier: false})
-        }else if(this.state.modifier === false){
-            this.setState({modifier: true})
+        // On cré un nouveau livre
+        const newLivre = {
+            id: id,
+            titre: titre,
+            auteur: auteur,
+            nbPages: parseInt(nbPages)
         }
 
-    //     // On efface la ligne
+        // On copie la liste des livres
+        const newListe = [...this.state.livres]
 
-    //     // On récupère le numero index du tableau de livres
-    //     const numCaseTabLivre = this.state.livres.findIndex(element => {
-    //         return element.id === id
-    //     })
+        // On change la le livre dans la liste des livres
+        newListe[numCaseTabLivre] = newLivre
 
-    //     const newLivre = {...this.state.livres[numCaseTabLivre]}
-
-
-    //     // On ajoute la ligne modif
-
-        
-
-        console.log(this.state.modifier)
+        // On met a jour
+        this.setState({
+            livres: newListe,
+            idLivreAModifier: 0,
+            alertMessage: {
+                message: "Modification avec succès",
+                colorAlert: "alert-success"
+            }
+        })
     }
 
     handleSupprimer = (id) => {
@@ -71,14 +79,20 @@ class Livres extends Component {
         // On cré une copie du livre pour pouvoir la supprimer en utilisant spread (ES7)
         const newLivre = {...this.state.livres[numCaseTabLivre]}
         // On supprime les infos du livre
-        this.state.livres.splice(numCaseTabLivre, 1);
+        this.state.livres.splice(numCaseTabLivre, 1)
 
         // // On copie l'ancien tablau pour y mettre les nouvelles infos (ici la suppression d'un livre)
         // const newTab = this.state.livres.slice()
         // newTab[numCaseTabLivre] = newLivre
 
         // On met a jour le tableau des livres
-        this.setState({Livres: newLivre})
+        this.setState({
+            Livres: newLivre,
+            alertMessage: {
+                message: "Suppression avec succès",
+                colorAlert: "alert-warning"
+            }
+        })
     }
 
     handleAjoutLivre = (titre, auteur, nbPages) => {
@@ -100,7 +114,11 @@ class Livres extends Component {
         this.setState((oldState, props) => {
             return {
                 livres: newTab,
-                lastIdLivre: oldState.lastIdLivre + 1
+                lastIdLivre: oldState.lastIdLivre + 1,
+                alertMessage: {
+                    message: "Ajout avec succès",
+                    colorAlert: "alert-success"
+                }
             }
         })
 
@@ -111,6 +129,7 @@ class Livres extends Component {
     render() {
         return (
             <Fragment>
+                {(this.state.alertMessage !== null) ? <Alert colorAlert={this.state.alertMessage.colorAlert} >{this.state.alertMessage.message}</Alert> : null}
                 <table className="table text-center">
                     <thead>
                         <tr className="table-dark">
@@ -122,11 +141,20 @@ class Livres extends Component {
                     </thead>
                     <tbody>
                         {this.state.livres.map((livre) => {
-                            return (
-                                <tr key = {livre.id}>
-                                    {(this.state.modifier === true) ? <Livre titre = {livre.titre} auteur = {livre.auteur} nbPages = {livre.nbPages} suppr = {() => this.handleSupprimer(livre.id)} modif = {() => this.handleModifer(livre.id)} modifValue = {this.state.modifier} /> : <FormulaireModifier />}
-                                </tr>
-                            )
+                            // Ce test est pour savoir s'il y a un livre a modifier
+                            if(livre.id !== this.state.idLivreAModifier) {
+                                return (
+                                    <tr key = {livre.id}>
+                                        <Livre titre = {livre.titre} auteur = {livre.auteur} nbPages = {livre.nbPages} suppr = {() => this.handleSupprimer(livre.id)} modif={() => {this.setState({idLivreAModifier: livre.id})}} />
+                                    </tr>
+                                )
+                            }else {
+                                return (
+                                    <tr key={livre.id}>
+                                        <FormulaireModifier id={livre.id} titre = {livre.titre} auteur = {livre.auteur} nbPages = {livre.nbPages} modifValidation={this.handleModifer} />
+                                    </tr>
+                                )
+                            }
                         })}
                     </tbody>
                 </table>
