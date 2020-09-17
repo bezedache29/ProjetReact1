@@ -1,0 +1,12 @@
+.triDroite {
+    clip-path: polygon(0 0, 0 100%, 100% 50%);
+    height: 30px;
+    width: 40px;
+    cursor: pointer;
+}
+.triGauche {
+    clip-path: polygon(0 50%, 100% 100%, 100% 0);
+    height: 30px;
+    width: 40px;
+    cursor: pointer;
+}

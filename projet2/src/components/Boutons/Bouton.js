@@ -4,7 +4,7 @@ const bouton = (props) => {
     let monCss = `btn ${props.colorBtn}`
     return (
         <>
-            <button className={monCss}>{props.children}</button>
+            <button className={monCss} onClick={props.clic}>{props.children}</button>
         </>
     )
 }

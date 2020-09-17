@@ -1,0 +1,7 @@
+.titrePolice {
+    font-family: 'Boogaloo', cursive;
+}
+.titrePolice:hover {
+    color: orange !important;
+    background-color: teal !important;
+}

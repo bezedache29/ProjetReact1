@@ -1,0 +1,20 @@
+.moins {
+    clip-path: polygon(0 35%, 100% 35%, 100% 65%, 0 65%);
+    background-color: orange;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+.plus {
+    clip-path: polygon(65% 0, 35% 0, 35% 35%, 0 35%, 0 65%, 35% 65%, 35% 100%, 65% 100%, 65% 65%, 100% 65%, 100% 35%, 65% 35%);
+    background-color: orange;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+.chevronDroite {
+    clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+    background-color: green;
+    width: 20px;
+    height: 20px;
+}
