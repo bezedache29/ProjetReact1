@@ -11,7 +11,14 @@ class Personnage extends Component {
                         <ImagePerso image={this.props.image} flecheGauche={this.props.flecheGauche} flecheDroite={this.props.flecheDroite} />
                     </div>
                     <div className="col-6">
-                        <CaracPerso force={this.props.force} agilite={this.props.agilite} intelligence={this.props.intelligence} ptsRestants={this.props.ptsRestants} plusForce={this.props.plusForce} moinsForce={this.props.moinsForce} />
+                        <CaracPerso 
+                            force={this.props.force} 
+                            agilite={this.props.agilite} 
+                            intelligence={this.props.intelligence} 
+                            ptsRestants={this.props.ptsRestants}
+                            plus={this.props.plus}
+                            moins={this.props.moins}
+                        />
                     </div>
                 </div>
             </Fragment>

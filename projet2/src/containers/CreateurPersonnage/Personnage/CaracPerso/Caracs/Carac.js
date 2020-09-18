@@ -10,7 +10,7 @@ const carac = (props) => {
         <>
             <div className="row no-gutters align-items-center">
                 <span className={css.moins} onClick={props.moins}></span>
-                <div className="d-flex justify-content-center align-items-center col-6">
+                <div className="d-flex justify-content-center align-items-center col">
                     <p className="m-0 ml-1 mr-2">{props.children}: </p>{carre}
                 </div>
                 <span className={css.plus} onClick={props.plus}></span>

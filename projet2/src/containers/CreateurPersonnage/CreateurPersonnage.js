@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import Bouton from '../../components/Boutons/Bouton'
 import Titre from '../../components/Titres/TitreH1'
 import Personnage from './Personnage/Personnage'
+import Armes from '../CreateurPersonnage/Armes/Armes'
 
 class CreateurPersonnage extends Component {
     state = {
@@ -9,9 +10,11 @@ class CreateurPersonnage extends Component {
             image: 1,
             force: 0,
             agilite: 0,
-            intelligence: 0
+            intelligence: 0,
+            arme: null
         },
-        ptsRestants : 7
+        ptsRestants : 7,
+        armes: ["epee", "fleau", "arc", "hache"]
     }
 
     handleGauche = () => {
@@ -38,18 +41,21 @@ class CreateurPersonnage extends Component {
         })
     }
 
-    handlePlusForce = () => {
+    handlePlus = (carac) => {
         this.setState((oldState, props) => {
             let pts = oldState.ptsRestants
             const newPerso = {...oldState.personnage}
-            if(oldState.personnage.force >= 5) {
-                newPerso.force = 5
-            }else {
-                newPerso.force++
-                if(newPerso.force !== 6) {
+            
+            if(oldState.personnage[carac] >= 5) {
+                newPerso[carac] = 5
+            }else if(pts !== 0) {
+                newPerso[carac]++
+                if(newPerso[carac] !== 6) {
                     pts--
                 }
             }
+                
+            
             return {
                 personnage:newPerso,
                 ptsRestants:pts
@@ -57,19 +63,35 @@ class CreateurPersonnage extends Component {
         })
     }
 
-    handleMoinsForce = () => {
+    handleMoins = (carac) => {
         this.setState((oldState, props) => {
             let pts = oldState.ptsRestants
             const newPerso = {...oldState.personnage}
-            if(oldState.personnage.force <= 1) {
-                newPerso.force = 0
-            }else {
-                newPerso.force--
-                pts++
+            
+            if(oldState.personnage[carac] <= 0) {
+                newPerso[carac] = 0
+            }else if(pts !== 7) {
+                newPerso[carac]--
+                if(newPerso[carac] !== -1) {
+                    pts++
+                }
             }
+
             return {
                 personnage: newPerso,
                 ptsRestants:pts
+            }
+        })
+    }
+
+    handleArme = (index) => {
+        this.setState((oldState, props) => {
+            const newPerso = {...oldState.personnage}
+            let monArme = oldState.armes[index]
+            oldState.personnage.arme = monArme
+
+            return {
+                personnage: newPerso
             }
         })
     }
@@ -80,8 +102,14 @@ class CreateurPersonnage extends Component {
             <section className="container">
                 <Titre>Créateur de personnage</Titre>
                 {/* <Personnage image={this.state.personnage.image} force={this.state.personnage.force} agilite={this.state.personnage.agilite} intelligence={this.state.personnage.intelligence} /> */}
-                <Personnage {...this.state.personnage} flecheGauche={this.handleGauche} flecheDroite={this.handleDroite} ptsRestants={this.state.ptsRestants} plusForce={this.handlePlusForce} moinsForce={this.handleMoinsForce} />
-                <div>Armes</div>
+                <Personnage {...this.state.personnage} 
+                    flecheGauche={this.handleGauche} 
+                    flecheDroite={this.handleDroite} 
+                    ptsRestants={this.state.ptsRestants} 
+                    plus={this.handlePlus}
+                    moins={this.handleMoins}
+                />
+                <Armes listeArmes={this.state.armes} monArme={this.handleArme} armeActuelle={this.state.personnage.arme} />
                 <div className="row no-gutters">
                     <Bouton colorBtn="btn-danger col-6" clic={() => {console.log("Réinitialiser")}}>Réinitialiser</Bouton>
                     <Bouton colorBtn="btn-success col-6" clic={() => {console.log("Créer")}}>Créer</Bouton>
