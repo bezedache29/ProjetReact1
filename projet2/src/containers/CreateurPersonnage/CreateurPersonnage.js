@@ -96,6 +96,29 @@ class CreateurPersonnage extends Component {
         })
     }
 
+    handleReset = () => {
+        this.setState((oldState, props) => {
+            const newPerso = {...oldState.personnage}
+            newPerso.image = 1
+            newPerso.force = 0
+            newPerso.agilite = 0
+            newPerso.intelligence = 0
+            newPerso.arme = null
+
+            return {
+                personnage: newPerso,
+                ptsRestants: oldState.ptsRestants = 7
+            }
+        })
+    }
+
+    handleCreationPerso = () => {
+        // On verifie que les points ont été distribué et que l'arme a été selectionné
+        if(this.state.ptsRestants === 0 && this.state.personnage.arme !== null) {
+            alert('Personnage créer')
+        }
+    }
+
     render() {
         return (
             <Fragment>
@@ -111,8 +134,8 @@ class CreateurPersonnage extends Component {
                 />
                 <Armes listeArmes={this.state.armes} monArme={this.handleArme} armeActuelle={this.state.personnage.arme} />
                 <div className="row no-gutters">
-                    <Bouton colorBtn="btn-danger col-6" clic={() => {console.log("Réinitialiser")}}>Réinitialiser</Bouton>
-                    <Bouton colorBtn="btn-success col-6" clic={() => {console.log("Créer")}}>Créer</Bouton>
+                    <Bouton colorBtn="btn-danger col-6" clic={this.handleReset}>Réinitialiser</Bouton>
+                    <Bouton colorBtn="btn-success col-6" clic={this.handleCreationPerso}>Créer</Bouton>
                 </div>
             </section>
             </Fragment>
