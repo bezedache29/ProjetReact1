@@ -3,6 +3,7 @@ import Bouton from '../../components/Boutons/Bouton'
 import Titre from '../../components/Titres/TitreH1'
 import Personnage from './Personnage/Personnage'
 import Armes from '../CreateurPersonnage/Armes/Armes'
+import axios from 'axios'
 
 class CreateurPersonnage extends Component {
     state = {
@@ -14,7 +15,41 @@ class CreateurPersonnage extends Component {
             arme: null
         },
         ptsRestants : 7,
-        armes: ["epee", "fleau", "arc", "hache"]
+        armes: null,
+        loading: false,
+        pseudo: ""
+    }
+
+    loadData = () => {
+        
+    }
+
+    componentDidMount = () => {
+        // On initialize le loading
+        this.setState({loading: true})
+        // On récupère les infos en bdd sur firebase stoke en json, avec axios
+        axios.get("https://creapersoreact.firebaseio.com/armes.json")
+            .then(reponse => {
+                // console.log(reponse)
+                // On récupère l'objet des armes stoké en bdd
+                // On utilise Object.values pour recupérer les données dans un tableau
+                const tabArmes = Object.values(reponse.data)
+                this.setState((oldState,props) => {
+                    let newArmes = oldState.armes
+                    newArmes = tabArmes
+
+                    return {
+                        armes: newArmes,
+                        loading: false
+                    }
+                })
+                console.log(tabArmes)
+            }).catch(error => {
+                console.log(error)
+                return {
+                    loading: false
+                }
+            })
     }
 
     handleGauche = () => {
@@ -113,9 +148,46 @@ class CreateurPersonnage extends Component {
     }
 
     handleCreationPerso = () => {
+        this.setState({loading: true})
         // On verifie que les points ont été distribué et que l'arme a été selectionné
         if(this.state.ptsRestants === 0 && this.state.personnage.arme !== null) {
-            alert('Personnage créer')
+            const player = {
+                perso: {...this.state.personnage},
+                pseudo: this.state.pseudo
+            }
+            // On insere en bdd dans une collection qui si elle n'existe pas elle sera créé
+            axios.post("https://creapersoreact.firebaseio.com/persos.json", player)
+                .then(reponse => {
+                    this.setState({
+                        personnage: {
+                            image: 1,
+                            force: 0,
+                            agilite: 0,
+                            intelligence: 0,
+                            arme: null
+                        },
+                        ptsRestants : 7,
+                        loading: false,
+                        pseudo: ""
+                    })
+
+                    this.props.refresh()
+                    
+                }).catch(error => {
+                    this.setState({
+                        personnage: {
+                            image: 1,
+                            force: 0,
+                            agilite: 0,
+                            intelligence: 0,
+                            arme: null
+                        },
+                        ptsRestants : 7,
+                        loading: false,
+                        pseudo: ""
+                    })
+                    console.log(error)
+                })
         }
     }
 
@@ -124,7 +196,12 @@ class CreateurPersonnage extends Component {
             <Fragment>
             <section className="container">
                 <Titre>Créateur de personnage</Titre>
+                {(this.state.loading === false) ? null : <div>Chargement...</div>}
                 {/* <Personnage image={this.state.personnage.image} force={this.state.personnage.force} agilite={this.state.personnage.agilite} intelligence={this.state.personnage.intelligence} /> */}
+                <div className="form-group">
+                    <label htmlFor="pseudo">Pseudo</label>
+                    <input type="text" className="form-control" id="pseudo" name="pseudo" value={this.state.pseudo} onChange={(event) => this.setState({pseudo: event.target.value})} />
+                </div>
                 <Personnage {...this.state.personnage} 
                     flecheGauche={this.handleGauche} 
                     flecheDroite={this.handleDroite} 
@@ -132,7 +209,7 @@ class CreateurPersonnage extends Component {
                     plus={this.handlePlus}
                     moins={this.handleMoins}
                 />
-                <Armes listeArmes={this.state.armes} monArme={this.handleArme} armeActuelle={this.state.personnage.arme} />
+                {(this.state.armes !== null) ? <Armes listeArmes={this.state.armes} monArme={this.handleArme} armeActuelle={this.state.personnage.arme} /> : null}
                 <div className="row no-gutters">
                     <Bouton colorBtn="btn-danger col-6" clic={this.handleReset}>Réinitialiser</Bouton>
                     <Bouton colorBtn="btn-success col-6" clic={this.handleCreationPerso}>Créer</Bouton>
