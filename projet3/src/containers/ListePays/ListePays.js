@@ -7,7 +7,8 @@ import axios from 'axios'
 class ListePays extends Component {
     state = {
         pays: null,
-        loading: false
+        loading: false,
+        regionSelectionner: ""
     }
 
     loadData = () => {
@@ -18,7 +19,8 @@ class ListePays extends Component {
                 const tabsPays = Object.values(reponse.data)
                 this.setState({
                     pays: tabsPays,
-                    loading: false
+                    loading: false,
+                    regionSelectionner: "Tous"
                 })
             }).catch(error => {
                 console.log(error)
@@ -30,19 +32,59 @@ class ListePays extends Component {
         this.loadData()
     }
 
+    handleAffichePaysRegion = (region) => {
+        this.setState({loading: true})
+        // On recupere la liste de spersos en bdd
+        axios.get(`https://restcountries.eu/rest/v2/region/${region}`)
+            .then(reponse => {
+                const tabsRegion = Object.values(reponse.data)
+                this.setState({
+                    pays: tabsRegion,
+                    loading: false,
+                    regionSelectionner: region
+                })
+            }).catch(error => {
+                console.log(error)
+                this.setState({loading: false})
+            })
+    }
+
+    HandleAfficheAllPays = () => {
+        this.setState({loading: true})
+        // On recupere la liste de spersos en bdd
+        axios.get("https://restcountries.eu/rest/v2/all")
+            .then(reponse => {
+                const tabsPays = Object.values(reponse.data)
+                this.setState({
+                    pays: tabsPays,
+                    loading: false,
+                    regionSelectionner: "Tous"
+                })
+            }).catch(error => {
+                console.log(error)
+                this.setState({loading: false})
+            })
+    }
+
+    // handleNbPays = () => {
+    //     const tabsPays = {...this.state.pays}
+    //     console.log(tabsPays)
+    // }
+
     render() {
         return (
             <Fragment>
                 <section className="container">
                     <Titre>Liste des pays du monde</Titre>
                     <div>
-                        <Boutons />
+                        <Boutons region={this.handleAffichePaysRegion} regionSelectionner={this.state.regionSelectionner} allPays={this.HandleAfficheAllPays}/>
+                        <p>Nombre de pays : <span></span></p>
                     </div>
                     <div className="row no-gutters">
                     {(this.state.loading) && <div>Chargement des pays...</div>}
                     {(!this.state.loading) && this.state.pays &&
                         this.state.pays.map((unPays, index) => {
-                            console.log(unPays)
+                            {/* console.log(unPays) */}
                             return (
                                 <div key={index} className="col-12 col-md-6">
                                     <Pays infosPays={unPays} />

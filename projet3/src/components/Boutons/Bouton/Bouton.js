@@ -4,7 +4,11 @@ const bouton = (props) => {
     let monCss = `btn ${props.btnColor}`
     return (
         <>
-            <button className={monCss}>{props.children}</button>
+            <button 
+                className={monCss} 
+                onClick={props.region}
+                style={props.isRegion ? {opacity: 1} : {opacity: 0.7}}
+            >{props.children}</button>
         </>
     )
 }
