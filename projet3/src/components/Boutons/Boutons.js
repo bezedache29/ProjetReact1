@@ -4,11 +4,11 @@ import Bouton from '../Boutons/Bouton/Bouton'
 const Boutons = (props) => {
     return (
         <>
-            <Bouton btnColor='btn-primary'>Europe</Bouton>
-            <Bouton btnColor='btn-primary'>Afrique</Bouton>
-            <Bouton btnColor='btn-primary'>Asie</Bouton>
-            <Bouton btnColor='btn-primary'>Amérique</Bouton>
-            <Bouton btnColor='btn-primary'>Océanie</Bouton>
+            <Bouton btnColor='btn-info'>Europe</Bouton>
+            <Bouton btnColor='btn-info'>Afrique</Bouton>
+            <Bouton btnColor='btn-info'>Asie</Bouton>
+            <Bouton btnColor='btn-info'>Amérique</Bouton>
+            <Bouton btnColor='btn-info'>Océanie</Bouton>
         </>
     )
 }
