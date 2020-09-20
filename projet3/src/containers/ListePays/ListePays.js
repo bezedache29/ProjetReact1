@@ -93,7 +93,7 @@ class ListePays extends Component {
                 {/* console.log(unPays) */}
                 return (
                     <div key={index} className="col-12 col-md-6">
-                        <Pays infosPays={unPays} />
+                        <Pays infosPays={unPays} {...this.props}/>
                     </div>
                 )
             })
