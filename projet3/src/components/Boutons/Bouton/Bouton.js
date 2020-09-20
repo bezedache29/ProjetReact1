@@ -6,7 +6,7 @@ const bouton = (props) => {
         <>
             <button 
                 className={monCss} 
-                onClick={props.region}
+                onClick={props.clic}
                 style={props.isRegion ? {opacity: 1} : {opacity: 0.7}}
             >{props.children}</button>
         </>
