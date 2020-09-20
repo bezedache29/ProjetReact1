@@ -2,7 +2,7 @@
 
 # Projet0
     Projet initiation React / ReactDOM
-    ![Cover](https://github.com/bezedache29/ProjetReact1/img/projet0.jpg)
+    ![Screenshot](projet0.png) 
     
 # Projet1
     Projet Bibliotheque (Formulaire + CRUD)
