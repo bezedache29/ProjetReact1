@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import Personne from './components/Personne/Personne'
 import Horloge from './containers/Horloge/Horloge'
 import "./App.css"
+import {BrowserRouter} from 'react-router-dom'
 
  class App extends React.Component {
      state = {
@@ -95,15 +96,17 @@ import "./App.css"
 
             // Liste
             <Fragment>
-                <button onClick={this.anniversaireHandler}>Anniversaire</button>
-                <Horloge />
-                {this.state.personnes.map((personne) => {
-                    return (
-                        <Personne key = {personne.id} {...personne} clic = {() => this.annifHandler(personne.id)}>
-                            Ici la propriété children de l'id : {personne.id}
-                        </Personne>
-                    )
-                })}
+                <BrowserRouter basename="/js/react/projet0">
+                    <button onClick={this.anniversaireHandler}>Anniversaire</button>
+                    <Horloge />
+                    {this.state.personnes.map((personne) => {
+                        return (
+                            <Personne key = {personne.id} {...personne} clic = {() => this.annifHandler(personne.id)}>
+                                Ici la propriété children de l'id : {personne.id}
+                            </Personne>
+                        )
+                    })}
+                </BrowserRouter>
             </Fragment>
         )
         
