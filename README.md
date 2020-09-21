@@ -15,4 +15,4 @@
 ## Projet3
     Projet Liste des pays avec catégorie en lien avec une API externe
     Link API => https://restcountries.eu/#api-endpoints-all
-"[http://ripley.eu/js/react/projet3/]"(Lien de l'appli)
+`[http://ripley.eu/js/react/projet3/]`(Lien de l'appli)
