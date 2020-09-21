@@ -10,20 +10,12 @@ const NavBar = (props) => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav mr-auto">
+                    <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
-                            <NavLink 
-                                className="nav-link" 
-                                // activeClassName="active activeAccueil" 
-                                // activeStyle={{
-                                //     textDecoration: "underline"
-                                // }}
-                                exact 
-                                to="/"
-                            >Accueil</NavLink>
+                            <NavLink className="nav-link" exact to="/">Accueil</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/localisation">Localisation</NavLink>
+                            <NavLink className="nav-link" exact to="/localisation">Localisation</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink className="nav-link" exact to="/contact">Contact</NavLink>
