@@ -11,6 +11,7 @@
 ## Projet2
     Projet Création de personnage + traietements des infos en BDD avec FireBase
 ![alt text](https://github.com/bezedache29/ProjetReact1/blob/master/img/projet2.jpg)
+[Lien de l'appli](http://ripley.eu/js/react/projet2/)
 
 ## Projet3
     Projet Liste des pays avec catégorie en lien avec une API externe
