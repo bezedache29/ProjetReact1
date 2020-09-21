@@ -10,7 +10,7 @@ import './App.css'
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/js/react/projet3">
 
       <Route path="/" exact component={NavBar} />
       <Route path="/pays" component={NavBar} />
