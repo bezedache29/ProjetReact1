@@ -8,7 +8,7 @@ import Contact from './containers/Contact/Contact'
 function App() {
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter basename="/js/react/projet4">
         <Route path="/" component={NavBar} />
         <Route path="/" exact render={(props) => <Accueil />} />
         <Route path="/localisation" render={(props) => <ListeEtablissements />} />
