@@ -1,4 +1,5 @@
 import React from 'react'
+import Bouton from '../../../components/Boutons/Bouton/Bouton'
 
 const etablissements = (props) => {
     let datesEts = ""
@@ -32,7 +33,10 @@ const etablissements = (props) => {
                         {horairesEts}
                     </ul>
                     <div className="pl-2 my-2">
-                        <a href={props.infosEts.properties.url} target="_blank" className="btn btn-primary">Visiter le site web</a>
+                        {(!props.infosEts.properties.url) && <Bouton btnColor='btn-primary'>Pas de site Web</Bouton>}
+                        {(props.infosEts.properties.url) &&
+                            <a href={props.infosEts.properties.url} target="_blank" className="btn btn-primary">Visiter le site web</a>
+                        }
                     </div>
                     
                 </div>
