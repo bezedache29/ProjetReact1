@@ -12,10 +12,18 @@ const navbar = (props) => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
-                            <NavLink className="nav-link" exact to="/">Accueil</NavLink>
+                            <NavLink 
+                                className="nav-link" 
+                                activeClassName="active activeAccueil" 
+                                activeStyle={{
+                                    textDecoration: "underline"
+                                }}
+                                exact 
+                                to="/"
+                            >Accueil</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" exact to="/pays">Liste des pays</NavLink>
+                            <NavLink className="nav-link" activeClassName="active activePays" to="/pays">Liste des pays</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink className="nav-link" exact to="/admin">Admin</NavLink>

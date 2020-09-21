@@ -10,7 +10,7 @@ class Pays extends Component {
         let content = ""
 
         if(this.props.pagePays) {
-            content = <div>Monnaie : {this.props.infosPays.currencies[0].name}</div>
+            content = <p className="m-0 mb-1">Monnaie : {this.props.infosPays.currencies[0].name}</p>
         }else {
             content = 
             //     <NavLink to={`/pays/${this.props.infosPays.translations.fr}`}>Voir détail</NavLink>
@@ -28,7 +28,7 @@ class Pays extends Component {
                         <h3>Nom : {this.props.infosPays.translations.fr}</h3>
                         <p className="m-0 mt-1">Capitale : {this.props.infosPays.capital}</p>
                         <p className="m-0 mt-1">Region: {this.props.infosPays.region}</p>
-                        <p className="m-0 mb-1">{content}</p>
+                        {content}
                     </div>
                 </div>
             </Fragment>
