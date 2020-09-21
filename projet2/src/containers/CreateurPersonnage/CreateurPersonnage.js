@@ -121,9 +121,11 @@ class CreateurPersonnage extends Component {
 
     handleArme = (index) => {
         this.setState((oldState, props) => {
+            // console.log(`arme ${index}`)
             const newPerso = {...oldState.personnage}
             let monArme = oldState.armes[index]
-            oldState.personnage.arme = monArme
+            newPerso.arme = monArme
+            // console.log(monArme)
 
             return {
                 personnage: newPerso

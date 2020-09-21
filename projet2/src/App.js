@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CreateurPersonnage from './containers/CreateurPersonnage/CreateurPersonnage'
 import ListePersonnage from './containers/ListePersonnages/ListePersonnages'
+import {BrowserRouter} from 'react-router-dom'
 
 class App extends Component {
   state = {
@@ -18,8 +19,10 @@ class App extends Component {
   render() {
     return (
       <>
-        <CreateurPersonnage refresh={this.handleRefresh} />
-        <ListePersonnage refresh={this.state.refresh}/>
+        <BrowserRouter basename="/js/react/projet2">
+          <CreateurPersonnage refresh={this.handleRefresh} />
+          <ListePersonnage refresh={this.state.refresh}/>
+        </BrowserRouter>
       </>
     );
   }
