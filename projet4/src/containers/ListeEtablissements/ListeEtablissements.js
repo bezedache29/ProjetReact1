@@ -10,7 +10,8 @@ class ListeEtablissements extends Component {
         etablissements: null,
         nomEtablissementPluriel: "mairies",
         nomEtablissementSingulier: "Mairie",
-        loading: false
+        loading: false,
+        etsSelectionner: 'mairie'
     }
 
     componentDidMount = () => {
@@ -49,7 +50,8 @@ class ListeEtablissements extends Component {
             const etsCorrectSingulier = 'Mairie'
             this.setState({
                 nomEtablissementPluriel:etsCorrect,
-                nomEtablissementSingulier:etsCorrectSingulier
+                nomEtablissementSingulier:etsCorrectSingulier,
+                etsSelectionner:etablissement
             })
             this.handleChangeEtablissement(etablissement)
         }else if(ets === 'commisseriat') {
@@ -58,7 +60,8 @@ class ListeEtablissements extends Component {
             const etsCorrectSingulier = 'Commisseriat de police'
             this.setState({
                 nomEtablissementPluriel:etsCorrect,
-                nomEtablissementSingulier:etsCorrectSingulier
+                nomEtablissementSingulier:etsCorrectSingulier,
+                etsSelectionner:etablissement
             })
             this.handleChangeEtablissement(etablissement)
         }else if(ets === 'pole') {
@@ -67,7 +70,8 @@ class ListeEtablissements extends Component {
             const etsCorrectSingulier = 'Pole emploi'
             this.setState({
                 nomEtablissementPluriel:etsCorrect,
-                nomEtablissementSingulier:etsCorrectSingulier
+                nomEtablissementSingulier:etsCorrectSingulier,
+                etsSelectionner:etablissement
             })
             this.handleChangeEtablissement(etablissement)
         }else if(ets === 'Prefecture') {
@@ -76,7 +80,8 @@ class ListeEtablissements extends Component {
             const etsCorrectSingulier = 'Préfecture'
             this.setState({
                 nomEtablissementPluriel:etsCorrect,
-                nomEtablissementSingulier:etsCorrectSingulier
+                nomEtablissementSingulier:etsCorrectSingulier,
+                etsSelectionner:etablissement
             })
             this.handleChangeEtablissement(etablissement)
         }
@@ -88,7 +93,7 @@ class ListeEtablissements extends Component {
             <Fragment>
             <div className="container mt-2">
                 <TitreH1>Rechercher un établissement :</TitreH1>
-                <Boutons etablissement={this.handleEtablissement}/>
+                <Boutons etsSelectionner={this.state.etsSelectionner} etablissement={this.handleEtablissement}/>
                 <TitreH2 addCss='my-2'>Liste des {this.state.nomEtablissementPluriel} :</TitreH2>
                 <div className="row no-gutters mb-4">
                 {(this.state.loading) && <div>Chargements des établissements</div>}

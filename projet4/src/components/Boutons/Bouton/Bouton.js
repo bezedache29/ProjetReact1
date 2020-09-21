@@ -5,7 +5,11 @@ const bouton = (props) => {
 
     return (
         <>
-            <button onClick={props.clic} className={monCss}>{props.children}</button>
+            <button 
+                onClick={props.clic} 
+                className={monCss} 
+                style={props.isEts ? {opacity: 1} : {opacity: 0.7}}
+            >{props.children}</button>
         </>
     )
 }
