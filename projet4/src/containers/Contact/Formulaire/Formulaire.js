@@ -8,7 +8,7 @@ class Formulaire extends Component {
             <>
                 <form className="my-3">
                     <div className="form-group mb-0">
-                        <label htmlFor="nom">Nom</label>
+                        <label htmlFor="nom">Nom <span className="badge badge-pill badge-warning text-dark">min 5 caractères</span></label>
                         <input 
                             type="text" 
                             name="nom" 
@@ -36,7 +36,7 @@ class Formulaire extends Component {
                     </div>
                     {(this.props.errors.email !== null) && (this.props.touched.email) ? <div style={{color:"red"}}>{this.props.errors.email}</div> : null}
                     <div className="form-group mt-2">
-                        <label htmlFor="message">Message</label>
+                        <label htmlFor="message">Message <span className="badge badge-pill badge-warning text-dark">min 100 caractères</span></label>
                         <textarea 
                             className="form-control" 
                             name="message" 
